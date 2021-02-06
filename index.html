@@ -7,6 +7,63 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+    <script>var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+            this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+            this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+            delta = this.period;
+            this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+            this.isDeleting = false;
+            this.loopNum++;
+            delta = 500;
+        }
+
+        setTimeout(function() {
+            that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+                new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+    </script>
 </head>
 <body>
 <div class="homepage">
@@ -25,13 +82,15 @@
     <div class="heading">
         <div class="intro_wrapper">
             <div class="intro_heading"><h1>Hi <br/> There<span class="special">.</span></h1></div>
-            <div class="intro_paragraph"><h3>I am basically "Anas Aijaz"</h3></div>
+            <div class="intro_paragraph"><h3>I am <a href="" class="typewrite" data-period="2000" data-type='[ "Anas Aijaz", "Web developer", "Android Developer", "Art admirer" , "Indian" , "Single" , "Crazy guy" , "NITian" , "Your Dad Lol"]'>
+                <span class="wrap"></span>
+            </a></h3></div>
         </div>
         <div class="divider"></div>
         <div class="outro_wrapper">
             <div class="outro_quote"><p>“Becoming a pro is like jumping onto a moving train that doesn’t stop. You can never get off of it. Not until you lose and fall off.”</p></div>
             <div class="outro_button">
-                <button class="material-button"><b>Let's Go!</b></button>
+                <button class="material-button"><b>Download this code</b></button>
             </div>
         </div>
     </div>
