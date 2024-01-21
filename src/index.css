@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.link-element .real-text, .link-element .fake-text {
+    transition: all 0.3s ease;
+}
+
+.link-element:hover .real-text{
+    transform: translateY(20px);
+}
+
+.link-element:hover .fake-text{
+    transform: translateY(20px);
+}
+
+
+:root {
+
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
