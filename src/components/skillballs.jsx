@@ -6,6 +6,8 @@ const num = SPONSORS.length;
 const circles = [];
 const images = [];
 const e = 0.5;
+let clicked = false;
+let clickedAt = 0;
 
 class Circle {
   constructor(pos, rad, p5, img) {
@@ -176,7 +178,7 @@ function SkillBalls() {
 
     p5.setup = () => {
       // A canvas based on full width of the container
-      p5.createCanvas(p5.windowWidth / 1.2, 200);
+      p5.createCanvas(p5.windowWidth / 1.2, 500);
       p5.imageMode(p5.CENTER);
       p5.strokeWeight(1);
       p5.stroke(p5.color("#fff"));
@@ -235,6 +237,9 @@ function SkillBalls() {
     };
 
     p5.mouseClicked = () => {
+      clicked = true;
+      clickedAt = p5.millis();
+
       for (let i = 0; i < num; i++) {
         circles[i].mouseClicked();
       }

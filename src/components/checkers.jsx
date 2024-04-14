@@ -44,6 +44,7 @@ class Square {
 
   display() {
     this.p5.push();
+    this.p5.noStroke();
     this.p5.fill(
       this.p5.color(`${this.color[0]}`, `${this.color[1]}`, `${this.color[2]}`)
     );

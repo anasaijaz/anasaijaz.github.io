@@ -30,8 +30,11 @@ const Marquee = () => {
       <div className="marquee__inner flex w-fit flex-auto flex-row">
         {Array(10)
           .fill(0)
-          .map((_) => (
-            <div className="marquee__part flex items-end flex-shrink-0">
+          .map((_, index) => (
+            <div
+              key={index}
+              className="marquee__part flex items-end flex-shrink-0"
+            >
               <p className="">
                 <span className="text-[32px] font-[prompt] font-semibold tracking-widest">
                   Let's Connect
